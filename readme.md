@@ -11,59 +11,21 @@ Persons are uniquely identified by a personal number (PNR). The name (NAME) is a
 
 ![ER-Model](erm-elearn.jpeg)
 
-## Textual Presentation:
+* version 2
 
-**primary key** 
-_foreign key_
+![E-Learning2](eLearning2.jpeg)
 
-* e-course (**LVA-NR:int**, name:varchar(32), duration:int, maxNumbOfParticipants:int, numOfTrainers:int)
-* learning module (**moduleID:int**, name:varchar(32))
-* learning object (**moduleID:int**, **name.varchar(32)**, type:varchar(32))
-* curriculum (**_moduleID:int_**, **_LVA-NR:int_**, order:int)
-* test module (**definition:varchar(32)**, _LVA-NR:int_, mode:varchar(32))
-* exam module (**ID:int**, _LVA-NR:int_, deadline:timestamp, time:int, type:varchar(32))
-* question (**ID:int**, question:varchar(32), AWTrue:varchar(32), AWFalse1:varchar(32), AWFalse2:varchar(32))
-* person (**PNR:int**, name:varchar(32), e-mail:varchar(32), password:varchar(32), isTrainer:boolean)
+## Relational Model (version 2)
 
-## Relational Model
-
-E-course:
-| LVA-Nr. | name | duration | maxNumOfParticipants | numOfTrainers |
-| -------|---|----|----|---|
-|1234|Coding| 5 | 10 |2
-
-Person:
-| PNR | name | e-mail | password | isTrainer|
-|----|----|----|----|----|
-|234|Lisa|my@email.com|password|false|
-
-Learning module:
-|module-ID| name|
-|--|---|
-|458|Web|
-
-Learning object:
-|module-ID| name| type|
-|---|---|---|
-458|cheatsheet|docx|
-
-Curriculum:
-|module-ID|LVA-Nr.|order|
-|--|--|--|
-|458|1234|4|
-
-Test module:
-|definition|LVA-Nr.|mode|
-|--|--|--|
-|testA|1234|modeA|
-
-Exam module:
-|exam-ID|LVA-Nr.|deadline|time|type|
-|--|--|--|--|--|
-|666|1234|YYYY-MM-DD hh:mm:ss|hh:mm:ss|Multiple Choice Exam
-
-Question:
-|question-ID|question|AWTrue|AWFalse1|AWFalse2|
-|--|--|--|--|--|
-|534|Is this a question?|Yes|No|Definitely not|
-
+* E-Course (**LVA_Nr:int**, *curriculum_ID:int*, *test_ID:int*, *requirement_ID:int*, *moderator_allo_ID:int*, name:varchar(20), max_participants:int, duration:time)
+* Requirementlist (**requirement_ID:int**, *LVA_Nr:int*, *prerequisite:int*)
+* Learning Module (**module_ID:int**, *curriculum_ID:int*, name:varchar(20))
+* Curriculum (**curriculum_ID:int**, *LVA_Nr:int*, *module_ID:int*, order_nr:int)
+* Learning Object (**name:varchar(20)**, ***module_ID:int***, type:varchar(15))
+* Test Module (**test_ID:int**, *mode_ID:int*, definition:varchar(20))
+* Exam Mode (**mode_ID:int**, *question_allo_ID:int*, type_of_test:varchar(20), deadline:timestamp, begins:timestamp)
+* Question Allocation (**question_allo_ID:int**, *mode_ID:int*, *question_ID:int*)
+* Questionnaire (**question_ID:int**, question:text(300), aw_true:text(100), aw_false1:text(100), aw_false2:text(100))
+* Person (**personal_ID:int**, first_name:varchar(20), last_name:varchar(20), email:varchar(30), is_moderator:boolean)
+* Course List (**course_list_ID:int**, *LVA_Nr:int*, *personal_ID:int*)
+* Moderator Allocation (**moderator_allo_ID:int**, *LVA_Nr:int*, *moderator_ID:int*)
