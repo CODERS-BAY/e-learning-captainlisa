@@ -29,3 +29,7 @@ Persons are uniquely identified by a personal number (PNR). The name (NAME) is a
 * Person (**personal_ID:int**, *moderator_allo_ID:int*, *course_list_ID:int*, first_name:varchar(20), last_name:varchar(20), email:varchar(30), is_moderator:boolean)
 * Course List (**course_list_ID:int**, LVA_Nr:int, personal_ID:int)
 * Moderator Allocation (**moderator_allo_ID:int**, LVA_Nr:int, moderator_ID:int)
+
+## E-Learning Schema
+
+![e-learning](elearning_schema.jpg)
